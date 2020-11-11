@@ -1,0 +1,17 @@
+C:\Users\remyg\Programming\C#\Lexicon_exercises\StorageMaster\Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\remyg\Programming\C#\Lexicon_exercises\StorageMaster\Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\remyg\Programming\C#\Lexicon_exercises\StorageMaster\Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\remyg\Programming\C#\Lexicon_exercises\StorageMaster\Tests\bin\Debug\Tests.dll
+C:\Users\remyg\Programming\C#\Lexicon_exercises\StorageMaster\Tests\bin\Debug\Tests.pdb
+C:\Users\remyg\Programming\C#\Lexicon_exercises\StorageMaster\Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+C:\Users\remyg\Programming\C#\Lexicon_exercises\StorageMaster\Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+C:\Users\remyg\Programming\C#\Lexicon_exercises\StorageMaster\Tests\bin\Debug\StorageMaster.exe
+C:\Users\remyg\Programming\C#\Lexicon_exercises\StorageMaster\Tests\bin\Debug\StorageMaster.pdb
+C:\Users\remyg\Programming\C#\Lexicon_exercises\StorageMaster\Tests\bin\Debug\StorageMaster.exe.config
+C:\Users\remyg\Programming\C#\Lexicon_exercises\StorageMaster\Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+C:\Users\remyg\Programming\C#\Lexicon_exercises\StorageMaster\Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+C:\Users\remyg\Programming\C#\Lexicon_exercises\StorageMaster\Tests\obj\Debug\StorageMaster_tests.csprojAssemblyReference.cache
+C:\Users\remyg\Programming\C#\Lexicon_exercises\StorageMaster\Tests\obj\Debug\StorageMaster_tests.csproj.CoreCompileInputs.cache
+C:\Users\remyg\Programming\C#\Lexicon_exercises\StorageMaster\Tests\obj\Debug\StorageMaster_tests.csproj.CopyComplete
+C:\Users\remyg\Programming\C#\Lexicon_exercises\StorageMaster\Tests\obj\Debug\Tests.dll
+C:\Users\remyg\Programming\C#\Lexicon_exercises\StorageMaster\Tests\obj\Debug\Tests.pdb

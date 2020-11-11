@@ -1,0 +1,7 @@
+C:\Users\remyg\Programming\C#\Lexicon_exercises\StorageMaster\StorageMaster\bin\Debug\StorageMaster.exe.config
+C:\Users\remyg\Programming\C#\Lexicon_exercises\StorageMaster\StorageMaster\bin\Debug\StorageMaster.exe
+C:\Users\remyg\Programming\C#\Lexicon_exercises\StorageMaster\StorageMaster\bin\Debug\StorageMaster.pdb
+C:\Users\remyg\Programming\C#\Lexicon_exercises\StorageMaster\StorageMaster\obj\Debug\StorageMaster.csproj.CoreCompileInputs.cache
+C:\Users\remyg\Programming\C#\Lexicon_exercises\StorageMaster\StorageMaster\obj\Debug\StorageMaster.exe
+C:\Users\remyg\Programming\C#\Lexicon_exercises\StorageMaster\StorageMaster\obj\Debug\StorageMaster.pdb
+C:\Users\remyg\Programming\C#\Lexicon_exercises\StorageMaster\StorageMaster\obj\Debug\StorageMaster.csprojAssemblyReference.cache
