@@ -22,7 +22,7 @@ namespace StorageMaster
             "SolidStateDrive"
         };
 
-        public IDictionary<string, string> StorageRegistry = new Dictionary<string, string>();
+        public IDictionary<string, Storage> StorageRegistry = new Dictionary<string, Storage>();
         private List<string> StorageTypes = new List<string>()
         {
             "Warehouse",
@@ -37,36 +37,44 @@ namespace StorageMaster
 
         public string AddProduct(string type, double price)
         {
-            if (type == "Gpu") { ProductsAvailable = new Gpu(price); }
-            else if (type == "HardDrive") { ProductsAvailable = new HardDrive(price); }
-            else if (type == "Ram") { ProductsAvailable = new Ram(price); }
-            else if (type == "SolidStateDrive") { ProductsAvailable = new SolidStateDrive(price); }
-            else { throw new InvalidOperationException("Invalid product type!"); }
+            if (!ProductTypes.Contains(type))
+            {
+                throw new InvalidOperationException("Invalid product type!");
+            }
 
-            //if (!ProductTypes.Contains(type))
-            //{
-            //    throw new InvalidOperationException("Invalid product type!");
-            //}
-            ProductPool.Add(type, price);
+            ProductFactory productfactory = null;
+            var product = productfactory.CreateProduct(type, price);
+
+            //ProductPool.Add(type, price);       CHECK THIS VERY IMPORTANT ---------------------------------------------------------!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
             return $"Added {type} to pool.";
         }
 
         public string RegisterStorage(string type, string name)
         {
-            if (type == "Warehouse") { StorageOptions = new Warehouse(name); }
-            else if (type == "AutomatedWarehouse") { StorageOptions = new AutomatedWarehouse(name); }
-            else if (type == "DistributionCenter") { StorageOptions = new DistributionCenter(name); }
-            else { throw new InvalidOperationException("Invalid storage type!"); }
+            if (!StorageTypes.Contains(type))
+            {
+                throw new InvalidOperationException("Invalid storage type!");
+            }
+            StorageFactory storagefactory = null;
+            var storage = storagefactory.CreateStorage(type, name);
 
-            StorageRegistry.Add(type, name);
+            StorageRegistry[storage.Name] = storage;
+            //StorageRegistry.Add(type, name);
 
-            //var storage = Storage
+            //if (type == "Warehouse") { StorageOptions = new Warehouse(name); }
+            //else if (type == "AutomatedWarehouse") { StorageOptions = new AutomatedWarehouse(name); }
+            //else if (type == "DistributionCenter") { StorageOptions = new DistributionCenter(name); }
+            //else { throw new InvalidOperationException("Invalid storage type!"); }
+
+            //StorageRegistry.Add(type, name);
+
+            ////var storage = Storage
             //if (!StorageTypes.Contains(type))
             //{
             //    throw new InvalidOperationException("Invalid storage type!");
             //}
-            //StorageRegistry.Add(type, name);
+            ////StorageRegistry.Add(type, name);
 
             return $"Registered {name}.";
         }
@@ -116,6 +124,10 @@ namespace StorageMaster
             if (!StorageRegistry.ContainsKey(destinationName))
             { throw new InvalidOperationException("Invalid destination storage!"); }
 
+            var sourceStorage = StorageRegistry[sourceGarageSlot];
+            var desintationStorage = StorageRegistry[destinationName];
+
+            var destinationGarageSlot = sourceStorage;
 
 
             return $"Sent {currentVehicle.GetType()} to {destinationName} (slot {destinationGarageSlot}.)";        
