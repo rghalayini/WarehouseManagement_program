@@ -22,7 +22,7 @@ namespace StorageMaster
                    AutomatedWarehouseGarageSlots,
                    DefaultVehicles) { }
 
-        public string description
+        public string Description
         {
             get
             {

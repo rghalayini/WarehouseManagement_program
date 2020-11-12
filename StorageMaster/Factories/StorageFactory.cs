@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StorageMaster
 {
-    public abstract class StorageFactory
+    public class StorageFactory
     {
         public Storage CreateStorage(string type, string name)
         {

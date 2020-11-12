@@ -7,14 +7,14 @@ using System.Text;
 using System.Threading.Tasks;
 using StorageMaster;
 
-namespace StorageMaster
+namespace StorageMaster 
 {
     public class StorageMaster
     {   
         List<Product> ProductPool = new List<Product>();
         //List<Storage> StorageRegistry = new List<Storage>();
 
-        private List<string> ProductTypes = new List<string>()
+        private readonly List<string> ProductTypes = new List<string>()
         {
             "Gpu",
             "HardDrive",
@@ -24,15 +24,22 @@ namespace StorageMaster
 
         public IDictionary<string, Storage> StorageRegistry = new Dictionary<string, Storage>();
        
-        private List<string> StorageTypes = new List<string>()
+        private readonly List<string> StorageTypes = new List<string>()
         {
             "Warehouse",
-            "Distribution Center",
-            "Automated Warehouse"
+            "DistributionCenter",
+            "AutomatedWarehouse"
         };
 
+
         private Vehicle currentVehicle; //we need to use it here
-       
+
+        //private StorageFactory storageFactory;
+
+        public StorageFactory storagefactory = new StorageFactory();
+        public ProductFactory productfactory = new ProductFactory();
+
+
         public string AddProduct(string type, double price)
         {
             if (!ProductTypes.Contains(type))
@@ -40,7 +47,6 @@ namespace StorageMaster
                 throw new InvalidOperationException("Invalid product type!");
             }
 
-            ProductFactory productfactory = null;
             var product = productfactory.CreateProduct(type, price);
 
             ProductPool.Add(product);
@@ -54,7 +60,6 @@ namespace StorageMaster
                 throw new InvalidOperationException("Invalid storage type!");
             }
 
-            StorageFactory storagefactory = null;
             var storage = storagefactory.CreateStorage(type, name);
 
             StorageRegistry.Add(name, storage);       
@@ -117,46 +122,41 @@ namespace StorageMaster
             var storage = StorageRegistry[storageName];
             var productsCount = storage.Products.Count;
 
-            var AvailableStock = storage.Products
+            var StockInfo = storage.Products
                                  .GroupBy(f => f.GetType().Name)
                                  .OrderByDescending(g => g.Count())
                                  .ThenBy(h => h.Key);
 
-            List<string> GarageVehicles = new List<string>();
+            List<string> GarageVehicleNames = new List<string>();
             foreach (var vehicle in storage.Garage)
             {
                 if (vehicle == null)
-                    GarageVehicles.Add("empty");
+                    GarageVehicleNames.Add("empty");
                 else
-                    GarageVehicles.Add(vehicle.GetType().Name);
+                    GarageVehicleNames.Add(vehicle.GetType().Name);
             }
 
+            double productsWeights = storage.Products.Sum(p => p.Weight);
+            int storageCapacity = storage.Capacity;
+            string StockFormat = "{ 0 }/{ 1 }";
+            
+            return $"Stock ({productsWeights} / {storageCapacity}) : [{StockInfo} \nGarage: [{GarageVehicleNames}]";
 
-            //AvailableStock
-
-
-
-            IEnumerable<Product> products = storage.Products.ToArray();
-            /*products.OrderBy<int, Product>(p => p.GetType()).
-                GroupBy(p => p.Name).ToList();
-            return "Stock ({0}/{1}): [{2}]\n, { productsCount}, productsCount, productsCount"; 
-                + "Garage: [{0}]";*/
-
-
-            return "string";
         }
 
         public string GetSummary()
         {
-            var s = "";
-            foreach (var item in ProductPool)
-            {
-                //s += "Name: " + item.name + "\n";
+            var AllStorages = StorageRegistry.Values
+                .OrderBy(p => p.Products.Sum(f => f.Price));
 
-                var storageName = StorageRegistry.Keys;
-                var storageWorth = 1;
-            }
-            return s;
+            StringBuilder final = new StringBuilder();
+            foreach (var storage in AllStorages)
+            {
+                final.Append($"{storage.Name}:");
+                double totalMoney = storage.Products.Sum(p => p.Price);
+                final.Append($"Storage Worth: {totalMoney:F2}");
+            }           
+            return final.ToString();
         }
     }
 }

@@ -40,6 +40,7 @@ namespace StorageMaster
             this.GarageSlots = garageSlots;
             this.Garage = new Vehicle[GarageSlots]; //corrected here 
             this.Products = new Product[] { };
+
         }
 
         // -- Methods to use -- 

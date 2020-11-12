@@ -6,13 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using StorageMaster;
 
-namespace Controller
+namespace StorageMaster
 {
     class StartUp
     {
         static void Main(string[] args)
         {
-            var c = new StoregeMaster();
+            var c = new StorageMaster();
             while (true)
             {
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace StorageMaster
 {
-    public abstract class ProductFactory
+    public class ProductFactory
     {
         public Product CreateProduct(string type, double price)
         {
