@@ -53,5 +53,29 @@ namespace StorageMaster_tests
             //-- Assert
             Assert.AreEqual(expected, actual);
         }
+
+        //[TestMethod]
+        //public void LoadProductTest(Product product)
+        //{
+        //    //-- Arrange
+        //    //Product product = new Product();
+        //    Ram ram1 = new Ram(5);
+        //    Van van1 = new Van();
+            
+
+
+        //    string expected = "Van capacity is 2";
+
+        //    //-- Act
+
+        //    var actual = van1.LoadProduct(ram1);           
+
+        //    //-- Assert
+        //    Assert.AreEqual(expected, actual);
+        //}
+
+
+
+
     }
 }

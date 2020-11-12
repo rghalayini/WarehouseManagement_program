@@ -30,8 +30,8 @@ namespace StorageMaster
             }
         }
 
-        readonly IReadOnlyCollection<Vehicle> Garage;
-        readonly IReadOnlyCollection<Product> Products;
+        public readonly IReadOnlyCollection<Vehicle> Garage;
+        public readonly IReadOnlyCollection<Product> Products;
 
         protected Storage(string name, int capacity, int garageSlots, IEnumerable<Vehicle> vehicles) //delete IEnumerable and replace it with vehicle
         {
