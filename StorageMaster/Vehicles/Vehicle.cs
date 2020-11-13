@@ -40,7 +40,7 @@ namespace StorageMaster
             this.Capacity = capacity;
             Trunk = new List<Product>(); //Claes
 
-            //this.products = products;
+            this.products = new List<Product>();
         }
 
         public void LoadProduct(Product product)  //ClAES
@@ -50,12 +50,12 @@ namespace StorageMaster
                 throw new InvalidOperationException("Vehicle is full");
             }
             //var products = new List<Product>();   //removed this and put list outside
-            foreach (var item in Trunk)
-            {
-                products.Add(item);
-            }
+            //foreach (var item in Trunk)
+            //{
+            //    products.Add(item);
+            //}
             products.Add(product);
-            Trunk = new ReadOnlyCollection<Product>(products);
+            //Trunk = new ReadOnlyCollection<Product>(products);
         }
 
         public Product UnLoad()  //Claes

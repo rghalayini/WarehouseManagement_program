@@ -41,7 +41,7 @@ namespace StorageMaster
                     try
                     {
 
-                        string s = c.AddProduct(input[1], int.Parse(input[2]));
+                        string s = c.AddProduct(input[1], double.Parse(input[2]));
                         Console.WriteLine(s);
 
                     }

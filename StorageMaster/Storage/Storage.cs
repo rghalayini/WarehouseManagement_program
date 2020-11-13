@@ -6,10 +6,8 @@ namespace StorageMaster
 {
     public abstract class Storage 
     {
-        private Vehicle[] VehicleInGarage;
+        private Vehicle[] garage;
         private List<Product> StorageProducts = new List<Product>();
-        //public Vehicle currentVehicle;
-
 
         public string Name { get; set; }
         public int Capacity { get; set; }
@@ -19,29 +17,44 @@ namespace StorageMaster
             get
             {
                 var productsWeight = 0.0;
-                foreach (var vehicle in Garage)
+                foreach (var vehicle in garage)
                 {
-                    foreach (var product in vehicle.Trunk)
+                    if (vehicle != null)
                     {
-                        productsWeight += product.Weight;
+                        foreach (var product in vehicle.Trunk)
+                        {
+                            productsWeight += product.Weight;
+                        }
                     }
                 }
                 return productsWeight >= Capacity;
             }
         }
 
-        public readonly IReadOnlyCollection<Vehicle> Garage;
-        public readonly IReadOnlyCollection<Product> Products;
+        //public readonly IReadOnlyCollection<Vehicle> Garage;
+        public IReadOnlyCollection<Product> Products;
+        public IReadOnlyCollection<Vehicle> Garage => this.garage;
 
-        protected Storage(string name, int capacity, int garageSlots, IEnumerable<Vehicle> vehicles) //delete IEnumerable and replace it with vehicle
+        protected Storage(string name, int capacity, int garageSlots, IEnumerable<Vehicle> vehicles)
         {
             this.Name = name;
             this.Capacity = capacity;
             this.GarageSlots = garageSlots;
-            this.Garage = new Vehicle[GarageSlots]; //corrected here 
+            this.garage = new Vehicle[GarageSlots]; //corrected here 
             this.Products = new Product[] { };
-
+            this.DefaultVehiclesInGarage(vehicles);
         }
+        private void DefaultVehiclesInGarage(IEnumerable<Vehicle> vehicles)
+        {
+            {
+                int i = 0;
+                foreach (var vehicle in vehicles)
+                {
+                    this.garage[i++] = vehicle;
+                }
+            }       
+        }
+
 
         // -- Methods to use -- 
 
@@ -63,15 +76,26 @@ namespace StorageMaster
         {
             var sentVehicle = GetVehicle(garageSlot);
 
-            var FreeSlotInGarage = deliveryLocation.Garage.Any(p => p == null);
-            if (FreeSlotInGarage == false)
+            if (!deliveryLocation.Garage.Any(p => p == null))
             {
                 throw new InvalidOperationException("No room in garage!");
             }
-
-            VehicleInGarage[garageSlot] = null;
-            int FreedSlot = Convert.ToInt32(VehicleInGarage[garageSlot]);
-            return FreedSlot;       
+   
+            {
+                int slot = 0;
+                List<Vehicle> vehiclesInGarage = deliveryLocation.Garage.ToList();
+                for (int i = 0; i < vehiclesInGarage.Count; i++)
+                {
+                    if (vehiclesInGarage[i] == null)
+                    {
+                        vehiclesInGarage[i] = sentVehicle;
+                        slot = i;
+                        break;
+                    }
+                    //Garage = new ReadOnlyCollection<Vehicle>(vehiclesInGarage);
+                }
+                return slot;
+            }
         }
 
         public int UnloadVehicle(int garageSlot)

@@ -17,10 +17,10 @@ namespace StorageMaster_tests
             //-- Arrange
             AutomatedWarehouse AW1 = new AutomatedWarehouse("Brooklyn");
 
-            string expected = "AW name is Brooklyn, has a capacity of 1, has 2 garageslots and contains 1 vehicles.";
+            string expected = "AW1 name is Brooklyn, has a capacity of 1, has 2 garageslots and contains 1 vehicles.";
 
             //-- Act
-            string actual = AW1.description;
+            string actual = AW1.Description;
 
             //-- Assert
             Assert.AreEqual(expected, actual);
