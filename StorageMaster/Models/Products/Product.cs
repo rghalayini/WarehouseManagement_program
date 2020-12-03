@@ -6,15 +6,21 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StorageMaster
+namespace StorageMaster.Models.Products
 {
     public abstract class Product 
     {
         private double price;
- 
+
+        public Product(double price, double weight)
+        {
+            this.Price = price;
+            this.Weight = weight;
+        }
+
         public double Price 
         {
-            get { return price; }
+            get { return this.price; }
             set
             {
                 if (value <0)
@@ -24,12 +30,8 @@ namespace StorageMaster
                 this.price = value;
             }               
         }
-        public double Weight { get; set; }
+        public double Weight { get; private set; }
 
-        public Product (double price, double weight)
-        {
-            this.Price = price;
-            this.Weight = weight;
-        }
+
     }
 }

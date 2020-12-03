@@ -1,11 +1,12 @@
 ﻿using StorageMaster;
+using StorageMaster.Models.Vehicles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StorageMaster
+namespace StorageMaster.Models.Storages
 {
     class Warehouse : Storage
     {
@@ -18,6 +19,7 @@ namespace StorageMaster
               new Semi(),
               new Semi()};
 
+//the below is just to test the creation of a storage. It is not necessary in this exercise
         public Warehouse(string name)
             : base(name,
                    WarehouseCapacity,

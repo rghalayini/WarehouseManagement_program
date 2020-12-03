@@ -45,23 +45,23 @@
   <ItemGroup>
     <Compile Include="Factories\VehicleFactory.cs" />
     <Compile Include="Factories\ProductFactory.cs" />
-    <Compile Include="Products\Gpu.cs" />
-    <Compile Include="Products\HardDrive.cs" />
-    <Compile Include="Products\Product.cs" />
+    <Compile Include="Models\Products\Gpu.cs" />
+    <Compile Include="Models\Products\HardDrive.cs" />
+    <Compile Include="Models\Products\Product.cs" />
     <Compile Include="StartUp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Products\Ram.cs" />
-    <Compile Include="Products\SolidStateDrive.cs" />
+    <Compile Include="Models\Products\Ram.cs" />
+    <Compile Include="Models\Products\SolidStateDrive.cs" />
     <Compile Include="Factories\StorageFactory.cs" />
-    <Compile Include="StorageMaster.cs" />
-    <Compile Include="Storage\AutomatedWarehouse.cs" />
-    <Compile Include="Storage\DistributionCenter.cs" />
-    <Compile Include="Storage\Storage.cs" />
-    <Compile Include="Storage\Warehouse.cs" />
-    <Compile Include="Vehicles\Semi.cs" />
-    <Compile Include="Vehicles\Truck.cs" />
-    <Compile Include="Vehicles\Van.cs" />
-    <Compile Include="Vehicles\Vehicle.cs" />
+    <Compile Include="Core\StorageMasterClass.cs" />
+    <Compile Include="Models\Storage\AutomatedWarehouse.cs" />
+    <Compile Include="Models\Storage\DistributionCenter.cs" />
+    <Compile Include="Models\Storage\Storage.cs" />
+    <Compile Include="Models\Storage\Warehouse.cs" />
+    <Compile Include="Models\Vehicles\Semi.cs" />
+    <Compile Include="Models\Vehicles\Truck.cs" />
+    <Compile Include="Models\Vehicles\Van.cs" />
+    <Compile Include="Models\Vehicles\Vehicle.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

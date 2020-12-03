@@ -5,13 +5,16 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StorageMaster
+namespace StorageMaster.Models.Products
 {
     public class SolidStateDrive : Product
     {
-        public SolidStateDrive(double Price)
-            : base(Price, 0.2) { }
+        private const double DefaultWeight = 0.2;
 
+        public SolidStateDrive(double Price)
+            : base(Price, DefaultWeight) { }
+
+        //the below is just to test the creation of a product. It is not necessary in this exercise
         public string description
         {
             get
@@ -20,8 +23,4 @@ namespace StorageMaster
             }
         }
     }
-
-    //public SolidStateDrive(double price, double weight) : base(price, weight)
-    //{ }
-    //public const double SSDWeight = 1;
 }

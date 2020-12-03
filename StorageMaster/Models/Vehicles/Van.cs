@@ -4,13 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StorageMaster
+namespace StorageMaster.Models.Vehicles
 {
     public class Van : Vehicle
     {
-        public Van () 
-            : base (2){ }
+        private const int DefaultCapacityValue = 2;
 
+        public Van () 
+            : base (DefaultCapacityValue) { }
+
+        //the below is just to test the creation of a vehicle. It is not necessary in this exercise
         public string description
         {
             get

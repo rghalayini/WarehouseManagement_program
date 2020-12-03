@@ -5,8 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using StorageMaster.Models.Vehicles;
 
-namespace StorageMaster
+namespace StorageMaster.Models.Storages
 {
     class DistributionCenter : Storage
     {
@@ -17,6 +18,8 @@ namespace StorageMaster
             { new Van(),
               new Van(),
               new Van()};
+
+        //the below is just to test the creation of a storage. It is not necessary in this exercise
         public DistributionCenter(string name)
             : base(name,
                    DistributionCenterCapacity,

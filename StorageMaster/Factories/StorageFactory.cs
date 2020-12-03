@@ -1,23 +1,32 @@
 ﻿using System;
+using StorageMaster.Models.Storages;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StorageMaster
+namespace StorageMaster.Factories
 {
     public class StorageFactory
     {
         public Storage CreateStorage(string type, string name)
         {
-            Storage NewStorage;
-
-            if (type == "Warehouse") { NewStorage = new Warehouse(name); }
-            else if (type == "AutomatedWarehouse") { NewStorage = new AutomatedWarehouse(name); }
-            else if (type == "DistributionCenter") { NewStorage = new DistributionCenter(name); }
-            else { throw new InvalidOperationException("Invalid storage type!"); }
-            
-            return NewStorage;
+            Storage CreatedStorage;
+            switch (type) 
+            {
+                case "Warehouse":
+                    CreatedStorage = new Warehouse(name);
+                    break;
+                case "AutomatedWarehouse":
+                    CreatedStorage = new AutomatedWarehouse(name);
+                    break;
+                case "DistributionCenter":
+                    CreatedStorage = new DistributionCenter(name);
+                    break;
+                default:
+                    throw new InvalidOperationException("Invalid storage type!");
+            }           
+            return CreatedStorage;
         }
     }
 }

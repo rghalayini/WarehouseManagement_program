@@ -1,15 +1,15 @@
 ﻿using System;
-using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
-using System.Threading.Tasks;
-using StorageMaster;
+using StorageMaster.Factories;
+using StorageMaster.Models.Products;
+using StorageMaster.Models.Storages;
+using StorageMaster.Models.Vehicles;
 
-namespace StorageMaster 
+namespace StorageMaster.Core
 {
-    public class StorageMaster
+    public class StorageMasterClass
     {   
         //List<Product> ProductPool = new List<Product>();
         //List<Storage> StorageRegistry = new List<Storage>();
@@ -50,7 +50,7 @@ namespace StorageMaster
             {
                 ProductPool[type] = new Stack<Product>();
             }
-            var product = productfactory.CreateProduct(type, price);
+            var product = this.productfactory.CreateProduct(type, price);
 
             this.ProductPool[type].Push(product);
             //ProductPool.Add(product);
@@ -64,7 +64,7 @@ namespace StorageMaster
                 throw new InvalidOperationException("Invalid storage type!");
             }
 
-            var storage = storagefactory.CreateStorage(type, name);
+            var storage = this.storagefactory.CreateStorage(type, name);
 
             StorageRegistry.Add(name, storage);       
 
@@ -74,27 +74,25 @@ namespace StorageMaster
         public string SelectVehicle(string storageName, int garageSlot)
         {
             var storage = StorageRegistry[storageName];
-            currentVehicle = storage.GetVehicle(garageSlot);    
+            this.currentVehicle = storage.GetVehicle(garageSlot);    
             
-            return $"Selected {currentVehicle.GetType().Name}.";
+            return $"Selected {this.currentVehicle.GetType().Name}.";
         }
         
         public string LoadVehicle(IEnumerable<string> productNames)
         {
             int loadedProductsCount = 0;
 
-            foreach (var name in productNames)    //(var name in productNames)
+            foreach (var name in productNames)  
             {
-
                 if (currentVehicle.IsFull) break;
-                else if (!ProductPool.ContainsKey(name) )//|| ProductPool[name].Any())
+                else if (!ProductPool.ContainsKey(name) )
                     throw new InvalidOperationException($"{name} is out of stock!");
                 else
                 {
                     var RemovedProduct = ProductPool[name].Pop();
                     currentVehicle.LoadProduct(RemovedProduct);
                     loadedProductsCount++;
-
                 }
             }
             return $"Loaded { loadedProductsCount}/{ productNames.Count()} products into { currentVehicle.GetType().Name }";
@@ -126,40 +124,46 @@ namespace StorageMaster
             int unloadedProductsCount = storage.UnloadVehicle(garageSlot);
             return $"Unloaded {unloadedProductsCount}/{productsInVehicle} products at {storageName}.";
         }
-
+        //check this
         public string GetStorageStatus(string storageName)
         {
             var storage = StorageRegistry[storageName];
             var productsCount = storage.Products.Count;
 
             var StockInfo = storage.Products
-                                 .GroupBy(f => f.GetType().Name)
-                                 .OrderByDescending(g => g.Count())
-                                 .ThenBy(h => h.Key);
+                .GroupBy(p => p.GetType().Name)
+                .Select(g => new
+                {
+                    Name = g.Key,
+                    Count = g.Count()
+                })
+                .OrderByDescending(p => p.Count)
+                .ThenBy(p => p.Name)
+                .Select(p => $"{p.Name} ({p.Count})")
+                .ToArray();
 
-            List<string> GarageVehicleNames = new List<string>();
-            foreach (var vehicle in storage.Garage)
-            {
-                if (vehicle == null)
-                    GarageVehicleNames.Add("empty");
-                else
-                    GarageVehicleNames.Add(vehicle.GetType().Name);
-            }
+            var productsCapacity = storage.Products.Sum(p => p.Weight);
 
-            double productsWeights = storage.Products.Sum(p => p.Weight);
-            int storageCapacity = storage.Capacity;
-            string StockFormat = "{ 0 }/{ 1 }";
-            
-            return $"Stock ({productsWeights} / {storageCapacity}) : [{StockInfo} \nGarage: [{GarageVehicleNames}]";
+            var stockFormat = string.Format("Stock ({0}/{1}): [{2}]",
+                productsCapacity,
+                storage.Capacity,
+                string.Join(", ", StockInfo));
+
+            var garage = storage.Garage.ToArray();
+            var vehicleNames = garage.Select(vehicle => vehicle?.GetType().Name ?? "empty").ToArray();
+
+            var garageFormat = string.Format("Garage: [{0}]", string.Join("|", vehicleNames));
+            return stockFormat + Environment.NewLine + garageFormat;
 
         }
-
+        //good
         public string GetSummary()
         {
             var AllStorages = StorageRegistry.Values
-                .OrderBy(p => p.Products.Sum(f => f.Price));
+                .OrderBy(p => p.Products.Sum(f => f.Price))
+                .ToList();
 
-            StringBuilder final = new StringBuilder();
+            var final = new StringBuilder();
             foreach (var storage in AllStorages)
             {
                 final.Append($"{storage.Name}:");

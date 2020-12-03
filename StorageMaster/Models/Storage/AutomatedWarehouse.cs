@@ -5,8 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using StorageMaster.Models.Vehicles;
 
-namespace StorageMaster
+namespace StorageMaster.Models.Storages
 {
     public class AutomatedWarehouse : Storage
     {
@@ -22,6 +23,7 @@ namespace StorageMaster
                    AutomatedWarehouseGarageSlots,
                    DefaultVehicles) { }
 
+        //the below is just to test the creation of a storage. It is not necessary in this exercise
         public string Description
         {
             get
