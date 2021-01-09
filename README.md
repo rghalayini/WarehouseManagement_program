@@ -1,6 +1,6 @@
 # Warehouse Management
 
-This is a project performed during my training in Lexicon Stockholm. It is focused on implementing Object-oriented programming principles to develop an actual application as a industrial project. The description of the project is shown below.
+This is a project performed during my training in Lexicon Stockholm. It is focused on implementing Object-oriented programming principles to develop an actual application as an industrial project. The description of the project is shown below.
 
 ## Overview
 In this exam, you need to build a warehouse management project, which has support for products, storage for storing products, and vehicles for transporting products from one storage to another. The project will consist of entity classes and a controller class, which manages the interaction between the storage, vehicles and products.
